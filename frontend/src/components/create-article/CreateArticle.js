@@ -36,18 +36,15 @@ class CreateArticle extends Component {
 
     const { user } = this.props.auth;
 
-    const post = { ...this.state, user: user.name };
+    console.log(user);
+
+    const post = { ...this.state, user: user.id };
 
     this.createPost(post);
-
-    this.setState({
-      title: "",
-      content: "",
-      tags: ""
-    });
   };
 
   createPost = async post => {
+    console.log(post);
     try {
       const newPost = {
         ...post,
@@ -57,16 +54,17 @@ class CreateArticle extends Component {
         },
         author: process.env.REACT_APP_EOSIO_ACCOUNT
       };
-
+      console.log("next make transaction");
       await this.eosio.transaction(
         process.env.REACT_APP_EOSIO_ACCOUNT,
-        "createpost",
+        "newarticle",
         {
           timestamp: newPost._id.timestamp,
           author: newPost._id.author,
           ...post
         }
       );
+      console.log("next set state");
 
       this.props.history.push("/");
     } catch (err) {
@@ -92,6 +90,7 @@ class CreateArticle extends Component {
                   onChange={this.onChange}
                   info="Enter the category name that best suites your content."
                 />
+
                 <TextFieldGroup
                   placeholder="Title"
                   name="title"
@@ -107,7 +106,6 @@ class CreateArticle extends Component {
                   onChange={this.onChange}
                   info="Write your story"
                 />
-
                 <TextFieldGroup
                   placeholder="Tags (eg. media,hosptality,travel...)"
                   name="tags"

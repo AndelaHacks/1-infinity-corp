@@ -9,7 +9,17 @@ async function createArticle(state, payload, blockInfo, context) {
     }).exec();
 
     // if article already exists do not insert it in again
-    if (article.length !== 0) return;
+    if (article.length !== 0) {
+      await Article.findByIdAndUpdate(
+        { timestamp: payload.data.timestamp, author: payload.data.author },
+        payload.data
+      ).exec();
+    }
+
+    // cast the upcoming id to ObjectId, just to be sure, and then use that ID to query the User
+
+    // let user = await User.findOne({ email: payload.data.user }).exec();
+    // console.log(payload.data);
 
     article = new Article({
       _id: {
@@ -17,9 +27,10 @@ async function createArticle(state, payload, blockInfo, context) {
         author: payload.data.author
       },
       author: payload.data.author,
+      user: payload.data.user,
       title: payload.data.title,
       content: payload.data.content,
-      tag: payload.data.tag,
+      tags: payload.data.tags,
       category: payload.data.category,
       articleConfirmed: true
     });

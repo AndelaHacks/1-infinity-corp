@@ -5,6 +5,7 @@ function createArticle(state, payload, blockInfo, context) {
       author: payload.data.author
     },
     author: payload.data.author,
+    user: payload.data.user,
     title: payload.data.title,
     content: payload.data.content,
     tags: payload.data.tags,

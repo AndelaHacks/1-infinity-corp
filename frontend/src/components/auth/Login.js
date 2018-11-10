@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
-import { Breadcrumb, BreadcrumbItem } from "mdbreact";
 import showcase from "../../img/showcase.jpg";
 
 class Login extends Component {
@@ -68,15 +67,15 @@ class Login extends Component {
             <div class="py-5">
               {/* <!-- Content --> */}
               <h2 class="card-title h2 my-4 py-2">Login</h2>
-              <p className="lead text-center">
-                Sign in to your DevConnector account
-              </p>
             </div>
           </div>
         </div>
-        <div className="container pt-5">
+        <div className="container mt-4">
           <div className="row">
             <div className="col-md-8 m-auto">
+              <p className="lead text-center">
+                Sign in to your DevConnector account
+              </p>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
                   placeholder="Email Address"

@@ -18,7 +18,13 @@ try {
     category: String,
     title: String,
     content: String,
-    tag: String,
+    tags: String,
+    reviews: [
+      {
+        reviewer: String,
+        review: String
+      }
+    ],
     articleConfirmed: {
       type: Boolean,
       default: false
