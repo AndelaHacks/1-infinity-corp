@@ -9,12 +9,7 @@ async function createArticle(state, payload, blockInfo, context) {
     }).exec();
 
     // if article already exists do not insert it in again
-    if (article.length !== 0) {
-      await Article.findByIdAndUpdate(
-        { timestamp: payload.data.timestamp, author: payload.data.author },
-        payload.data
-      ).exec();
-    }
+    if (article.length !== 0) return;
 
     // cast the upcoming id to ObjectId, just to be sure, and then use that ID to query the User
 

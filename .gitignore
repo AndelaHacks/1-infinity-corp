@@ -34,3 +34,7 @@ yarn-error.log*
 jsconfig.json
 .history
 .vscode/settings.json
+
+# machine
+Machine learning/__pycache__/*
+Machine learning/venv/
