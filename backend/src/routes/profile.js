@@ -120,6 +120,9 @@ export default () => {
       if (req.body.location) profileFields.location = req.body.location;
       if (req.body.bio) profileFields.bio = req.body.bio;
       if (req.body.status) profileFields.status = req.body.status;
+      if (req.body.accountname)
+        profileFields.accountname = req.body.accountname;
+      if (req.body.privateKey) profileFields.privateKey = req.body.privateKey;
 
       // Social
       profileFields.social = {};

@@ -15,6 +15,7 @@ class CreateProfile extends Component {
     this.state = {
       displaySocialInputs: false,
       handle: "",
+      accountname: "",
       location: "",
       status: "",
       bio: "",
@@ -44,8 +45,8 @@ class CreateProfile extends Component {
 
       // If profile field doesnt exist, make empty string
       profile.location = !isEmpty(profile.location) ? profile.location : "";
-      profile.githubusername = !isEmpty(profile.githubusername)
-        ? profile.githubusername
+      profile.accountname = !isEmpty(profile.accountname)
+        ? profile.accountname
         : "";
       profile.bio = !isEmpty(profile.bio) ? profile.bio : "";
       profile.social = !isEmpty(profile.social) ? profile.social : {};
@@ -68,6 +69,7 @@ class CreateProfile extends Component {
       // Set component fields state
       this.setState({
         handle: profile.handle,
+        accountname: profile.accountname,
         location: profile.location,
         status: profile.status,
         bio: profile.bio,
@@ -113,7 +115,7 @@ class CreateProfile extends Component {
           <InputGroup
             placeholder="Twitter Profile URL"
             name="twitter"
-            icon="fab fa-twitter"
+            icon="fa fa-twitter"
             value={this.state.twitter}
             onChange={this.onChange}
             error={errors.twitter}
@@ -122,7 +124,7 @@ class CreateProfile extends Component {
           <InputGroup
             placeholder="Facebook Page URL"
             name="facebook"
-            icon="fab fa-facebook"
+            icon="fa fa-facebook"
             value={this.state.facebook}
             onChange={this.onChange}
             error={errors.facebook}
@@ -131,7 +133,7 @@ class CreateProfile extends Component {
           <InputGroup
             placeholder="Linkedin Profile URL"
             name="linkedin"
-            icon="fab fa-linkedin"
+            icon="fa fa-linkedin"
             value={this.state.linkedin}
             onChange={this.onChange}
             error={errors.linkedin}
@@ -140,7 +142,7 @@ class CreateProfile extends Component {
           <InputGroup
             placeholder="YouTube Channel URL"
             name="youtube"
-            icon="fab fa-youtube"
+            icon="fa fa-youtube"
             value={this.state.youtube}
             onChange={this.onChange}
             error={errors.youtube}
@@ -149,7 +151,7 @@ class CreateProfile extends Component {
           <InputGroup
             placeholder="Instagram Page URL"
             name="instagram"
-            icon="fab fa-instagram"
+            icon="fa fa-instagram"
             value={this.state.instagram}
             onChange={this.onChange}
             error={errors.instagram}
@@ -189,6 +191,14 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   error={errors.handle}
                   info="A unique handle for your profile URL. Your full name, company name, nickname"
+                />
+                <TextFieldGroup
+                  placeholder="* EOS Account name"
+                  name="accountname"
+                  value={this.state.accountname}
+                  onChange={this.onChange}
+                  error={errors.accountname}
+                  info="A unique accountname for your profile URL. Your eos account name"
                 />
                 <SelectListGroup
                   placeholder="Status"

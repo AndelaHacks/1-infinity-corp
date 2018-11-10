@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-import { View, Mask, Container } from "mdbreact";
+
+import ArticleFeed from "../articles/ArticleFeed";
+import Spinner from "../common/Spinner";
+import { getPosts } from "../../actions/postActions";
 
 import Jumbotron from "./Jumbotron";
-import Article from "../articles/Article";
 
 class Landing extends Component {
   constructor(props) {
@@ -14,7 +16,8 @@ class Landing extends Component {
       isAuthenticated: false
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
+    this.props.getPosts();
     if (this.props.auth.isAuthenticated) {
       this.setState({
         isAuthenticated: !this.state.isAuthenticated
@@ -23,21 +26,36 @@ class Landing extends Component {
   }
 
   render() {
+    const { posts, loading } = this.props.post;
+    let postContent;
+
+    if (posts === null || loading) {
+      postContent = <Spinner />;
+    } else {
+      postContent = <ArticleFeed posts={posts} />;
+    }
+
     return (
       <div>
-        {this.state.isAuthenticated ? "" : <Jumbotron />}\
-        <Article />
+        {this.state.isAuthenticated ? "" : <Jumbotron />}
+        {postContent}
       </div>
     );
   }
 }
 
 Landing.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  getPosts: PropTypes.func.isRequired,
+  post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  post: state.post
 });
 
-export default connect(mapStateToProps)(Landing);
+export default connect(
+  mapStateToProps,
+  { getPosts }
+)(Landing);

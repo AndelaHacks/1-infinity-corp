@@ -15,6 +15,11 @@ try {
       required: true,
       max: 40
     },
+    accountname: {
+      type: String,
+      max: 12
+    },
+    privateKey: String,
     location: {
       type: String
     },

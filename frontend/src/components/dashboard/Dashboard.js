@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import ProfileActions from "./ProfileActions";
+
+import { Container, Row, Col, Mask, Fa, View, Button } from "mdbreact";
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
@@ -55,16 +57,15 @@ class Dashboard extends Component {
     }
 
     return (
-      <div className="dashboard">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4">Dashboard</h1>
-              {dashboardContent}
-            </div>
-          </div>
-        </div>
-      </div>
+      <Container>
+        <h2 className="h1-responsive font-weight-bold text-center my-5 pt-5">
+          My Articles
+        </h2>
+        <p className="text-center w-responsive mx-auto mb-5">
+          All Articles linked to my account
+        </p>
+        {dashboardContent}
+      </Container>
     );
   }
 }

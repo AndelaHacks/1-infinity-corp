@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Article } from "../models";
+import { Article, User } from "../models";
 
 export default () => {
   let router = Router();
@@ -15,10 +15,35 @@ export default () => {
   router.get("/", (req, res) => {
     Article.find()
       .sort({ date: -1 })
-      .then(article => res.json(article))
-      .catch(err =>
-        res.status(404).json({ noarticlefound: "No article found" })
-      );
+      .then(article => {
+        Object.values(article).forEach(value => {
+          User.findById(value.user).then(user => {
+            let allarticle = [];
+
+            Object.values(article).forEach(value => {
+              allarticle.push({
+                _id: value._id,
+                user: {
+                  _id: user._id,
+                  name: user.name,
+                  avatar: user.avatar
+                },
+                title: value.title,
+                content: value.content,
+                tags: value.tags,
+                category: value.category,
+                reviews: value.reviews
+              });
+            });
+
+            Promise.all(allarticle).then(articleResults => {
+              res.json(articleResults);
+            });
+          });
+        });
+        // res.json(article);
+      })
+      .catch(err => res.status(404).json(err));
   });
 
   // @route   GET api/article/:id

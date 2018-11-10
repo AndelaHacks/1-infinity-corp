@@ -92,7 +92,8 @@ export default () => {
             id: user.id,
             name: user.name,
             avatar: user.avatar,
-            role: user.role
+            role: user.role,
+            email: user.email
           }; // Create JWT Payload
 
           // Sign Token
